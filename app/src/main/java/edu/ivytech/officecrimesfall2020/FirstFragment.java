@@ -16,17 +16,31 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.util.UUID;
+
 import static android.widget.CompoundButton.*;
 
 public class FirstFragment extends Fragment {
+    private static final String ARG_CRIME_ID = "edu.ivytech.officecrimesfall2020.crime_id";
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckbox;
+
+    public static FirstFragment newInstance(UUID crimeId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_CRIME_ID, crimeId);
+
+        FirstFragment fragment = new FirstFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCrime = new Crime();
+        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
+        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
 
     }
 
@@ -38,6 +52,7 @@ public class FirstFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_first, container, false);
         mTitleField = v.findViewById(R.id.crime_title);
+        mTitleField.setText(mCrime.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -58,6 +73,7 @@ public class FirstFragment extends Fragment {
         mDateButton.setText(mCrime.getDate().toString());
         mDateButton.setEnabled(false);
         mSolvedCheckbox = v.findViewById(R.id.crime_solved);
+        mSolvedCheckbox.setChecked(mCrime.isSolved());
         mSolvedCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -81,8 +97,8 @@ public class FirstFragment extends Fragment {
 
     @Override
     public void onPause() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        crimeLab.add(mCrime);
+       // CrimeLab crimeLab = CrimeLab.get(getActivity());
+       // crimeLab.add(mCrime);
         super.onPause();
     }
 }

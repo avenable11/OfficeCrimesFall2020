@@ -42,7 +42,9 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(),CrimeActivity.class);
+                Crime newCrime = new Crime();
+                CrimeLab.get(getBaseContext()).add(newCrime);
+                Intent i = CrimeActivity.newIntent(getBaseContext(), newCrime.getId());
                 startActivity(i);
             }
         });
