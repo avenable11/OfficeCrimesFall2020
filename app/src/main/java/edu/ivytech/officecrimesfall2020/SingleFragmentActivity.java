@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
     protected abstract Fragment createFragment();
@@ -44,7 +43,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Crime newCrime = new Crime();
                 CrimeLab.get(getBaseContext()).add(newCrime);
-                Intent i = CrimeActivity.newIntent(getBaseContext(), newCrime.getId());
+                Intent i = CrimeDetailActivity.newIntent(getBaseContext(), newCrime.getId());
                 startActivity(i);
             }
         });

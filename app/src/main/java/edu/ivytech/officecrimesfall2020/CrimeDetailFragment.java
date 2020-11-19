@@ -14,24 +14,23 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.UUID;
 
 import static android.widget.CompoundButton.*;
 
-public class FirstFragment extends Fragment {
+public class CrimeDetailFragment extends Fragment {
     private static final String ARG_CRIME_ID = "edu.ivytech.officecrimesfall2020.crime_id";
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckbox;
 
-    public static FirstFragment newInstance(UUID crimeId) {
+    public static CrimeDetailFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_CRIME_ID, crimeId);
 
-        FirstFragment fragment = new FirstFragment();
+        CrimeDetailFragment fragment = new CrimeDetailFragment();
         fragment.setArguments(args);
         return fragment;
     }

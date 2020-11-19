@@ -7,17 +7,17 @@ import androidx.fragment.app.Fragment;
 
 import java.util.UUID;
 
-public class CrimeActivity extends SingleFragmentActivity {
+public class CrimeDetailActivity extends SingleFragmentActivity {
     public static final String EXTRA_CRIME_ID = "edu.ivytech.officecrimesfall2020.crime_id";
 
     public static Intent newIntent(Context packageContext, UUID crimeId) {
-        Intent intent = new Intent(packageContext, CrimeActivity.class);
+        Intent intent = new Intent(packageContext, CrimeDetailActivity.class);
         intent.putExtra(EXTRA_CRIME_ID, crimeId);
         return intent;
     }
     @Override
     protected Fragment createFragment() {
         UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
-        return FirstFragment.newInstance(crimeId);
+        return CrimeDetailFragment.newInstance(crimeId);
     }
 }
