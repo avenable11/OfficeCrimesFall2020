@@ -96,8 +96,8 @@ public class CrimeDetailFragment extends Fragment {
 
     @Override
     public void onPause() {
-       // CrimeLab crimeLab = CrimeLab.get(getActivity());
-       // crimeLab.add(mCrime);
+       CrimeLab crimeLab = CrimeLab.get(getActivity());
+       crimeLab.updateCrime(mCrime);
         super.onPause();
     }
 }
